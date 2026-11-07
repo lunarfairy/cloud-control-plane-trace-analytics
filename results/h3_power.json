@@ -1,0 +1,20 @@
+{
+ "population_auroc": 0.7960668137692352,
+ "10": {
+  "power_lcb_gt_070": 0.73,
+  "median_ci_width": 0.12960060514375132,
+  "median_auc": 0.8000145093011971
+ },
+ "15": {
+  "power_lcb_gt_070": 0.825,
+  "median_ci_width": 0.11162115139862261,
+  "median_auc": 0.7951446266081468
+ },
+ "20": {
+  "power_lcb_gt_070": 0.915,
+  "median_ci_width": 0.09897456308947855,
+  "median_auc": 0.7960623987599227
+ },
+ "samples": 200,
+ "boot": 200
+}

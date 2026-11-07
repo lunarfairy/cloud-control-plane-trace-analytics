@@ -1,0 +1,30 @@
+{
+ "think2": {
+  "think_scale": 2.0
+ },
+ "idle": {
+  "p_idle": 0.06,
+  "idle_median_min": 25.0
+ },
+ "review_hi": {
+  "review_shift": 1.0
+ },
+ "silent_hi": {
+  "silent_shift": 0.5
+ },
+ "silent_lo": {
+  "silent_shift": -0.5
+ },
+ "console3": {
+  "console_pre_reads": 3.6,
+  "console_post_reads": 3.0
+ },
+ "weaksig": {
+  "h_read_p": 0.5,
+  "t_read_p": 0.8,
+  "t_extra_reads": 1
+ },
+ "flatskill": {
+  "strategy_skill_scale": 0.0
+ }
+}

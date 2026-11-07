@@ -1,0 +1,22 @@
+{
+ "vectors": 16169,
+ "vector_agreement": 1.0,
+ "unknown_ops": [],
+ "per_code": {
+  "F1": 1.0,
+  "F2": 1.0,
+  "F3": 1.0,
+  "F4": 1.0,
+  "F5": 1.0,
+  "F6": 1.0,
+  "F7": 1.0,
+  "S1": 1.0,
+  "S2": 1.0,
+  "S3": 1.0,
+  "S4": 1.0,
+  "S5": 1.0
+ },
+ "full_states": 16169,
+ "full_state_agreement": 1.0,
+ "n_learners_full": 400
+}
