@@ -70,9 +70,38 @@ def cluster_boot(values_by_unit, stat, reps=1000, seed=0):
 
 
 # ------------------------------------------------------------ RQ2 polling
+def polling_detection_probability(segments, delta):
+    """Length of the union of violated intervals modulo the polling period."""
+    projected = []
+    for a, b in segments:
+        length = b - a
+        if length >= delta:
+            return 1.0
+        if length <= 0:
+            continue
+        start = a % delta
+        end = start + length
+        if end <= delta:
+            projected.append((start, end))
+        else:
+            projected.extend(((start, delta), (0.0, end - delta)))
+    if not projected:
+        return 0.0
+    projected.sort()
+    left, right = projected[0]
+    covered = 0.0
+    for a, b in projected[1:]:
+        if a > right:
+            covered += right - left
+            left, right = a, b
+        else:
+            right = max(right, b)
+    return (covered + right - left) / delta
+
+
 def polling_recall(recs, eps_by, deltas=(1, 5, 15, 60, 240, 1440), boot=400):
     """Detection iff a poll falls inside a violated (applicable) segment; analytic
-    uniform-phase prediction E[min(1, sum_k d_k/Delta)] for comparison."""
+    uniform-phase prediction from the union of segments modulo Delta."""
     out = {}
     for dmin in deltas:
         dsec = dmin * 60.0
@@ -84,7 +113,7 @@ def polling_recall(recs, eps_by, deltas=(1, 5, 15, 60, 240, 1440), boot=400):
             g = poll_grid(r, t, dsec)
             for e in eps_by[r["sid"]]:
                 hit = any(np.any((g >= a) & (g < b)) for a, b in e["segs"])
-                pred = min(1.0, sum(min(1.0, (b - a) / dsec) for a, b in e["segs"]))
+                pred = polling_detection_probability(e["segs"], dsec)
                 per[r["sid"]].append((e["code"][0], e["wall"], e["cfg"], hit, pred, e["censored"]))
         allr = [x for L in per.values() for x in L]
         res = {}

@@ -77,9 +77,9 @@ def fig2():
     ax.plot(x, [bc[b]["pred"] for b in bins], "D", color="k", ms=3.5)
     for i, b in enumerate(bins):
         ax.text(i, max(bc[b]["recall"], bc[b]["pred"]) + 0.04, f"n={bc[b]['n']}", ha="center", fontsize=6)
-    ax.set_xticks(x); ax.set_xticklabels(["<5\nmin", "5–30\nmin", "0.5–2\nh", ">12\nh"]); ax.set_ylim(0, 1.15)
+    ax.set_xlim(-0.6, len(bins) - 0.4); ax.set_xticks(x); ax.set_xticklabels(["<5\nmin", "5–30\nmin", "0.5–2\nh", ">12\nh"]); ax.set_ylim(0, 1.15)
     ax.set_ylabel("Recall at Δ = 60 min"); ax.set_xlabel("Configuration-violation duration")
-    ax.set_title("Recall follows min(1, d/Δ)", loc="left"); ax.text(0.03, 0.80, "◆ predicted", transform=ax.transAxes, fontsize=6)
+    ax.set_title("Uniform-phase prediction", loc="left"); ax.text(0.03, 0.80, "◆ predicted", transform=ax.transAxes, fontsize=6)
     ax = axs[2]
     modes = [("iid", "random"), ("burst", "burst"), ("create_only", "creates"), ("delete_only", "deletes"), ("reorder", "reorder"), ("duplicate", "duplicate")]
     for j, (rs, col, mk, lab) in enumerate((("none", "0.45", "o", "replay only"), ("60", cF, "s", "+ hourly resync"), ("15", "#6fa8dc", "^", "+ 15-min resync"))):
@@ -125,7 +125,7 @@ def fig3():
     ax.text(450, -0.013, "over true skill", color="0.35", fontsize=6, ha="center")
     ax.axhline(0, color="k", lw=0.6); ax.set_ylim(-0.02, 0.18)
     ax.set_xticks(NP); ax.set_xlim(150, 750); ax.set_xlabel("Cohort size N"); ax.set_ylabel("Gain in cross-validated R² at λ = 0")
-    ax.set_title("Prediction gain, no causal effect", loc="left")
+    ax.set_title("Prediction gain at λ = 0", loc="left")
     for a, letter in zip(axs, "abc"):
         panel_letter(a, letter)
     save(fig, "fig3_designs")
